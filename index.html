@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="zh" class="no-js">   
+    <head>
+	    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="style/style.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/es5.min.js"></script>
+        <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.6&key=b8de5b4702c3fe783c3bfb4ba022e1ed&plugin=AMap.Driving"></script>
+        <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="js/echarts.js"></script>
+        <script type="text/javascript">
+             window.onload = function main() {
+                 Tabs(".list-item", ".contents", "list-item-checked", "contents-checked");
+             }
+        </script>
+    </head>
+    <body style="background-image: url(img/nybj.png)">
+	    <header id="header">
+		    <li class="nav">渝蓉高速（四川段）智慧交通数据平台</li>
+	    </header>
+	    <div class="main">
+		    <div id="div1">
+			    <div id="huawu" style="width: 419px;height: 238px;">
+				    
+			    </div>
+		    </div>
+            <!-- 话务 -->
+		    <div id="div2">	            
+	            <div id="abc" style="width: 419px;height: 423px;">
+		            
+	            </div>
+		    </div>
+            <!-- 车流量对比 -->
+		    <div id="div3">
+			    <div id="aaa" style="width: 419px;height: 238px;">
+				    
+			    </div>
+		    </div>
+            <!-- 车流量占比 -->
+		    <div id="div4">
+			    <div class="contents contents-checked">
+				    <div id="container">
+
+			        </div>			        				  
+			    </div>
+                <div class="contents" style="background-color: #41ff6f;">
+	                图片展示
+                </div>
+                <div class="contents">
+	                <video width="100%;" height="567px" controls="controls">
+				        <source src="Video/4.35.mp4"></source>
+			        </video>
+
+                </div>
+
+			</div>
+            <!-- 展示 -->
+		    <div id="div5">
+			    <iframe src="shuju.html" width="1091px" height="331px" frameborder="0" scrolling="no"></iframe>
+	        </div>
+            <!-- 数据 -->
+		    <div id="div6">
+			    <div id="zanbi" style="width: 333px;height: 350px;"></div>
+			    <div id="meiri" style="width: 333px;height: 400px;"></div>
+		    </div>
+		    <div id="div7">
+			    <ul id="list-title">
+                    <li class="list-item list-item-checked">地图演示</li>
+                    <li class="list-item">图片展示</li>
+                    <li class="list-item">视频展示</li>
+                </ul>
+	        </div>
+            <!--主页操作-->
+	        <div id="div8">
+		        <iframe src="time.html" width="100%" height="35px" frameborder="0" scrolling="no"></iframe>
+	        </div>
+            <!--顶部时间-->
+	    <script>
+            var map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom:10,
+                center: [104.913485,30.291629]
+                
+            });
+            // 初始化高德地图
+            var driving = new AMap.Driving({
+                map: map 
+            }); 
+            // 新建导航模块
+            driving.search([
+                {keyword: '成都收费站(G5013渝蓉高速入口)',city:'成都'},
+                {keyword: '四川安岳收费站(G5013渝蓉高速东南向)',city:'重庆'}
+            ]);
+            //  起点终点
+            map.setMapStyle('amap://styles/2e071f59372982774ec6e05b62d10658');
+            // 地图样式      
+            AMap.event.addDomListener(document.getElementById('yirao'), 'click', function() {
+                // 设置缩放级别和中心点
+                map.setZoomAndCenter(11, [104.206798,30.648216]);
+                // 在新中心点添加 marker 
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [104.206798,30.648216]
+                    
+                });
+            });
+            // 一绕
+            AMap.event.addDomListener(document.getElementById('errao'), 'click', function() {
+                // 设置缩放级别和中心点
+                map.setZoomAndCenter(10, [104.448927,30.561026]);
+                // 在新中心点添加 marker 
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [104.448927,30.561026]
+                });
+            });
+            // 二绕
+            AMap.event.addDomListener(document.getElementById('sanrao'), 'click', function() {
+                // 设置缩放级别和中心点
+                map.setZoomAndCenter(10, [104.709058,30.405488]);
+                // 在新中心点添加 marker 
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [104.709058,30.405488]
+                });
+            });
+            // 三绕
+            AMap.event.addDomListener(document.getElementById('suizimei'), 'click', function() {
+                // 设置缩放级别和中心点
+                map.setZoomAndCenter(10, [104.907595,30.291755]);
+                // 在新中心点添加 marker 
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [104.907595,30.291755],
+                   
+                });
+            });
+            // 遂资眉
+            AMap.event.addDomListener(document.getElementById('neisui'), 'click', function() {
+                // 设置缩放级别和中心点
+                map.setZoomAndCenter(10, [105.297052,29.96602]);
+                // 在新中心点添加 marker 
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [105.297052,29.96602]
+                });
+            });
+            // 内遂
+            AMap.event.addDomListener(document.getElementById('quanjing'), 'click', function() {
+                // 设置缩放级别和中心点
+                map.setZoomAndCenter(9, [104.907595,30.291755]);
+                // 在新中心点添加 marker 
+                var marker = new AMap.Marker({
+                    map: map,
+                    position: [104.907595,30.291755]
+                });
+            });
+            // 全景
+        </script><!-- 地图 -->
+	    <script>
+		var myChart = echarts.init(document.getElementById('abc'));		
+        var option = {
+           title : {
+               text: '渝蓉高速（四川段）全线车流量占比',
+               subtext: '2018-7-23',
+               x:'center',
+                    textStyle: {
+	                    fontWeight: 'normal', 
+	                    color: '#ffffff',
+	            },
+           },
+           tooltip : {
+               trigger: 'item',
+               formatter: "{a} <br/>{b} : {c} ({d}%)"
+           },
+           legend: {
+               orient: 'vertical',
+               left: 'left',
+               data: ['成都','龙泉驿','洛带','养马','简阳','禾丰','高寺','乐至','石湍','朝阳','安岳','兴隆','李家','省界'],
+                textStyle: {
+	                   
+	                    color: '#ffffff',
+	            },
+
+           },
+           series : [
+               {
+                   name: '渝蓉高速（四川段）',
+                   type: 'pie',
+                   radius : '55%',
+                   center: ['50%', '60%'],
+                   data:[
+                       {value:335, name:'成都'},
+                       {value:310, name:'龙泉驿'},
+                       {value:234, name:'洛带'},
+                       {value:0, name:'养马'},
+                       {value:0, name:'简阳'},
+                       {value:1234,name:'禾丰'},
+                       {value:1548, name:'高寺'},
+                       {value:1548, name:'乐至'},
+                       {value:1548, name:'石湍'},
+                       {value:0, name:'朝阳'},
+                       {value:1548, name:'安岳'},
+                       {value:1548, name:'兴隆'},
+                       {value:1548, name:'李家'},
+                       {value:1548, name:'省界'}
+                   ],
+                    textStyle: {
+	                   
+	                    color: '#ffffff',
+	            },
+
+                   itemStyle: {
+                       emphasis: {
+                           shadowBlur: 10,
+                           shadowOffsetX: 0,
+                           shadowColor: 'rgba(0, 0, 0, 0.5)'
+                       }
+                   }
+               }
+           ]
+        };	              	            
+        myChart.setOption(option);  //使用刚指定的配置项和数据显示图表。
+        </script><!-- 车流量占比 -->
+        <script>
+        var myChart = echarts.init(document.getElementById('aaa'));    
+        var option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                },
+                
+            },
+            legend: {
+                data:['成都','龙泉驿','洛带','养马','简阳','禾丰','高寺','乐至','石湍','朝阳','安岳','兴隆','李家','省界'],
+                      textStyle: {
+	                   
+	                    color: '#ffffff',
+	            },
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true,
+                
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+                textStyle: {
+	                   
+	                    color: '#ffffff',
+	            },
+
+              
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    
+                }
+            ],
+            series : [
+                {
+                    name:'成都',
+                    type:'bar',
+                    
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'龙泉驿',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'洛带',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'养马',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'简阳',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320],
+                },
+                {
+                    name:'禾丰',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'高寺',
+                    type:'bar',
+                   
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'乐至',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'石湍',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'朝阳',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'安岳',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'兴隆',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'李家',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'省界',
+                    type:'bar',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                }
+            ]
+        };
+        
+        myChart.setOption(option);  //使用刚指定的配置项和数据显示图表。
+        </script><!-- 车流量对比 -->
+        <script>
+	    var myChart = echarts.init(document.getElementById('huawu'));	    
+	    var option = {
+           tooltip : {
+               trigger: 'axis',
+               axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                   type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+               }
+           },
+           legend: {
+               data: ['交通事故', '汽车故障','求助加油','咨询','其他'],
+               textStyle:{
+	               color:'#ffffff'
+               },
+           },
+           grid: {
+               left: '3%',
+               right: '4%',
+               bottom: '3%',
+               containLabel: true,
+               
+           },
+           xAxis:  {
+               type: 'value'
+           },
+           yAxis: {
+               type: 'category',
+               data: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+                textStyle: {
+	               color: '#ffffff',
+	            },
+
+           },
+           series: [
+               {
+                   name: '交通事故',
+                   type: 'bar',
+                   stack: '总量',
+                   label: {
+                       normal: {
+                           show: true,
+                           position: 'insideRight'
+                       }
+                   },
+                   data: [1, 2, 3, 4, 5, 6, 7]
+               },
+               {
+                   name: '汽车故障',
+                   type: 'bar',
+                   stack: '总量',
+                   label: {
+                       normal: {
+                           show: true,
+                           position: 'insideRight'
+                       }
+                   },
+                   data: [1, 2, 3, 4, 5, 6, 7]
+               },
+               {
+                   name:'求助加油',
+                   type: 'bar',
+                   stack: '总量',
+                   label: {
+                       normal: {
+                           show: true,
+                           position: 'insideRight'
+                       }
+                   },
+                   data: [1, 2, 3, 4, 5, 6, 7]
+               },
+               {
+                   name: '咨询',
+                   type: 'bar',
+                   stack: '总量',
+                   label: {
+                       normal: {
+                           show: true,
+                           position: 'insideRight'
+                       }
+                   },
+                   data: [1, 2, 3, 4, 5, 6, 7]
+               },
+               {
+                   name: '其他',
+                   type: 'bar',
+                   stack: '总量',
+                   label: {
+                       normal: {
+                           show: true,
+                           position: 'insideRight'
+                       }
+                   },
+                   data: [1, 2, 3, 4, 5, 6, 7]
+               }
+           ]
+        };	       
+        myChart.setOption(option);  //使用刚指定的配置项和数据显示图表。
+	    </script><!-- 话务 -->
+        <script>
+	    var myChart = echarts.init(document.getElementById('zanbi'));    
+        var option = {
+         title : {
+             text: '今日话务对比',
+             subtext: '2018年7月25日',
+             x:'center',
+             textStyle:{
+	            color:'#ffffff'
+            },
+         },
+         tooltip : {
+             trigger: 'item',
+             formatter: "{a} <br/>{b} : {c} ({d}%)"
+         },
+         legend: {
+             x : 'center',
+             y : 'bottom',
+             data:['交通事故', '其他','求助加油','咨询','汽车故障'],
+              textStyle: {
+	             color: '#ffffff',
+	            },
+
+         },
+         toolbox: {
+             show : true,
+             feature : {
+                 mark : {show: true},
+                 dataView : {show: true, readOnly: false},
+                 magicType : {
+                     show: true,
+                     type: ['pie', 'funnel']
+                 },
+                 restore : {show: true},
+                 saveAsImage : {show: true}
+             }
+         },
+         calculable : true,
+         series : [
+             {
+                 name:'面积模式',
+                 type:'pie',
+                 radius : [30, 110],
+                 center : ['50%', '50%'],
+                 roseType : 'area',
+                 data:[
+                     {value:1, name:'交通事故'},
+                     {value:5, name:'其他'},
+                     {value:15, name:'求助加油'},
+                     {value:25, name:'咨询'},
+                     {value:20, name:'汽车故障'}
+                 ]
+             }
+         ]
+        };      
+        myChart.setOption(option);  //使用刚指定的配置项和数据显示图表。	        
+	    </script><!-- 今日话务 -->
+        <script>
+         	/**
+          * Created by Administrator on 2016/9/12.
+          */
+         
+         /*
+          * tabs_name:用于触发事件的标签的类名；
+          * contents_name:内容容器的类名；
+          * tabs_checked_style:标签为选中状态时的样式；
+          * contents_checked_style:内容容器为选中状态时的样式；
+          *
+          * classList.toggle();
+          * 检查元素的类名列表中是否有指定的类名，如果有则移除，如果没有则添加；
+          * */
+         function Tabs(tabs_name, contents_name, tabs_checked_style, contents_checked_style) {
+             var tabs = document.querySelectorAll(tabs_name),
+                 contents = document.querySelectorAll(contents_name),
+                 e_mark = 0;
+             for (var i = 0, len = tabs.length; i < len; i++) {
+                 tabs[i].num = i;
+                 tabs[i].onclick = function () {
+                     tabs[e_mark].classList.toggle(tabs_checked_style);
+                     tabs[this.num].classList.toggle(tabs_checked_style);
+                     contents[e_mark].classList.toggle(contents_checked_style);
+                     contents[this.num].classList.toggle(contents_checked_style);
+                     e_mark = this.num;
+                 };
+             }
+         }
+	</script><!-- TAB菜单 -->
+        <!-- <script>
+	    var myChart = echarts.init(document.getElementById('meiri'));      
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
+            },
+            series: [
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    selectedMode: 'single',
+                    radius: [0, '30%'],
+        
+                    label: {
+                        normal: {
+                            position: 'inner'
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:335, name:'直达', selected:true},
+                        {value:679, name:'营销广告'},
+                        {value:1548, name:'搜索引擎'}
+                    ]
+                },
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    radius: ['40%', '55%'],
+                    label: {
+                       
+                    },
+                    data:[
+                        {value:335, name:'直达'},
+                        {value:310, name:'邮件营销'},
+                        {value:234, name:'联盟广告'},
+                        {value:135, name:'视频广告'},
+                        {value:1048, name:'百度'},
+                        {value:251, name:'谷歌'},
+                        {value:147, name:'必应'},
+                        {value:102, name:'其他'}
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);        
+        </script> 客货占比 -->
+    </body>
+</html>
